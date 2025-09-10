@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live HTML Editor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Fira+Code:wght@500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .editor-pane {
+            font-family: 'Fira Code', monospace;
+            font-size: 14px;
+            background-color: #282c34;
+            color: #abb2bf;
+        }
+    </style>
+</head>
+<body class="bg-slate-200">
+
+    <div class="flex flex-col h-screen">
+        <!-- Header -->
+        <header class="bg-white shadow-md p-3 z-10">
+            <h1 class="text-xl font-bold text-slate-700">Real-Time Code Editor & Preview</h1>
+        </header>
+
+        <!-- Main Content (Editor + Preview) -->
+        <div class="flex flex-1 overflow-hidden">
+            
+            <!-- Editor Panel -->
+            <div class="w-1/2 flex flex-col">
+                <div class="bg-slate-700 p-2 text-white font-semibold text-sm">HTML / CSS / JS</div>
+                <textarea id="editor" class="editor-pane w-full h-full p-4 resize-none outline-none" spellcheck="false"></textarea>
+            </div>
+
+            <!-- Preview Panel -->
+            <div class="w-1/2 flex flex-col border-l-4 border-slate-300">
+                 <div class="bg-slate-700 p-2 text-white font-semibold text-sm">Live Preview</div>
+                <iframe id="preview" class="w-full h-full bg-white"></iframe>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        const editor = document.getElementById('editor');
+        const preview = document.getElementById('preview');
+
+        // Function to update the preview pane
+        function updatePreview() {
+            const code = editor.value;
+            const previewDoc = preview.contentWindow.document;
+            
+            // Write the editor content to the iframe
+            previewDoc.open();
+            previewDoc.write(code);
+            previewDoc.close();
+        }
+
+        // Add an event listener to update on any input in the editor
+        editor.addEventListener('input', updatePreview);
+
+        // Initial placeholder code
+        const initialCode = `<!DOCTYPE html>
+<html>
+<head>
+    <title>My Live Page</title>
+    <style>
+        body { 
+            font-family: sans-serif; 
+            padding: 20px;
+            background-color: #f0f8ff;
+        }
+        h1 {
+            color: #4682b4;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hello, Live Preview!</h1>
+    <p>Type in the editor on the left to see changes here.</p>
+</body>
+</html>`;
+
+        // Set the initial code and render it
+        editor.value = initialCode;
+        updatePreview();
+    </script>
+
+</body>
+</html>
