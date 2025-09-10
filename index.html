@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live HTML Editor</title>
+    <title>Live HTML Editor (Top Preview)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Fira+Code:wght@500&display=swap" rel="stylesheet">
     <style>
@@ -26,19 +26,19 @@
             <h1 class="text-xl font-bold text-slate-700">Real-Time Code Editor & Preview</h1>
         </header>
 
-        <!-- Main Content (Editor + Preview) -->
-        <div class="flex flex-1 overflow-hidden">
+        <!-- Main Content (Preview + Editor) -->
+        <div class="flex flex-col flex-1 overflow-hidden">
             
-            <!-- Editor Panel -->
-            <div class="w-1/2 flex flex-col">
-                <div class="bg-slate-700 p-2 text-white font-semibold text-sm">HTML / CSS / JS</div>
-                <textarea id="editor" class="editor-pane w-full h-full p-4 resize-none outline-none" spellcheck="false"></textarea>
-            </div>
-
-            <!-- Preview Panel -->
-            <div class="w-1/2 flex flex-col border-l-4 border-slate-300">
+            <!-- Preview Panel (Now on Top) -->
+            <div class="h-1/2 w-full flex flex-col border-b-4 border-slate-300">
                  <div class="bg-slate-700 p-2 text-white font-semibold text-sm">Live Preview</div>
                 <iframe id="preview" class="w-full h-full bg-white"></iframe>
+            </div>
+
+            <!-- Editor Panel (Now on Bottom) -->
+            <div class="h-1/2 w-full flex flex-col">
+                <div class="bg-slate-700 p-2 text-white font-semibold text-sm">HTML / CSS / JS</div>
+                <textarea id="editor" class="editor-pane w-full h-full p-4 resize-none outline-none" spellcheck="false"></textarea>
             </div>
 
         </div>
@@ -76,11 +76,21 @@
         h1 {
             color: #4682b4;
         }
+        canvas {
+            border: 1px solid black;
+        }
     </style>
 </head>
 <body>
     <h1>Hello, Live Preview!</h1>
-    <p>Type in the editor on the left to see changes here.</p>
+    <p>The preview is now on top. Let's draw on a canvas!</p>
+    <canvas id="myCanvas" width="300" height="150"></canvas>
+    <script>
+        const canvas = document.getElementById('myCanvas');
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = 'red';
+        ctx.fillRect(10, 10, 100, 80);
+    <\/script>
 </body>
 </html>`;
 
@@ -91,3 +101,4 @@
 
 </body>
 </html>
+
